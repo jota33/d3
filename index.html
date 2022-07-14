@@ -24,9 +24,24 @@
     .style("stroke", "gray")
     .style("fill", "white")
     .attr("r", 40)
-    .attr("cx", function(d, i){return 70 + (i*500/6)})
-    .attr("cy", 300/3);
+    .attr("cx", function(d, i){return Math.cos(i*360/5)})
+    .attr("cy", function(d, i){return Math.sin(i*360/5)});
 </script>
+    
+    var angles = d3.range(0,360,45);
+// [0, 45, 90, 135, 180, 225, 270, 315]
+radar.append('circle')
+  .attr('cx',0)
+  .attr('cy',0)
+  .attr('r', radius);
+
+radar.selectAll('line')
+  .data(angles).enter()
+  .append('line')
+  .attr('x0',0)
+  .attr('y0',0)
+  .attr('x1',function(d) { return Math.cos(d) * radius})
+  .attr('y1',function(d) { return Math.sin(d) * radius});
  </body>
    
 </html>
