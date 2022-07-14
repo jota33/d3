@@ -24,8 +24,8 @@
     .style("stroke", "gray")
     .style("fill", "white")
     .attr("r", 40)
-    .attr("cx", function(d, i){return Math.cos(8*10*i*360/5)})
-    .attr("cy", function(d, i){return Math.sin(8*10*i*360/5)});
+    .attr("cx", function(d, i){return 250 + 8*10*Math.cos(i*360/5)})
+    .attr("cy", function(d, i){return 150 + 8*10*Math.sin(i*360/5)});
 </script>
 </body>
    
