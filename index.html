@@ -28,8 +28,8 @@
     .style("stroke", "gray")
     .style("fill", "white")
     .attr("r", Math.sqrt(current_width*current_height)/160)
-    .attr("cx", function(d, i){return current_width/2 +  Math.sqrt(current_width*current_height)*Math.cos(i*2*Math.PI/Nt)})
-    .attr("cy", function(d, i){return current_height/2 + Math.sqrt(current_width*current_height)*Math.sin(i*2*Math.PI/Nt)})
+    .attr("cx", function(d, i){return current_width/2 +  Math.sqrt(current_width*current_height)*Math.cos(i*2*Math.PI/Nt)/3})
+    .attr("cy", function(d, i){return current_height/2 + Math.sqrt(current_width*current_height)*Math.sin(i*2*Math.PI/Nt)/3})
     .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
     .on("mouseout", function(){d3.select(this).style("fill", "white");});
     
