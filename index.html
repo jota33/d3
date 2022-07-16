@@ -4,11 +4,18 @@
 <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-    <div id="viz"></div>
+<div id="viz"></div>
 <script type="text/javascript">
     var dataset = [],
-    current_width = window.innerWidth;
-    current_height = window.innerHeight;
+    var margin = {
+     top: 20,
+     right: 20,
+     bottom: 30,
+     left: 40}
+    
+    current_width = window.innerWidth - margin.top - margin.bottom ;
+    current_height = window.innerHeight - margin.left - margin.right ;
+    
     i = 0;
     Nt = 28;
     Nx = 1*Nt;
