@@ -33,12 +33,16 @@
     .attr("right", 0)
     .attr("bottom", 0)
     .attr("left", 0);    
+    
+    // Option 1: give 2 color names
+    var myColor = d3.scaleLinear().domain([1,10])
+    .range(["white", "black"])
 
     sampleSVG.selectAll("circle")
     .data(dataset)
     .enter().append("circle")
     .style("stroke", "gray")
-    .style("fill", "white")
+    .style("fill", function(d){return myColor(d) })
     .attr("r", Math.sqrt(current_width*current_height)/160)
     .attr("cx", function(d, i){return current_width/2 +  Math.sqrt(current_width*current_height)*Math.cos(i*2*Math.PI/Nt)/3})
     .attr("cy", function(d, i){return current_height/2 + Math.sqrt(current_width*current_height)*Math.sin(i*2*Math.PI/Nt)/3})
@@ -62,27 +66,10 @@
         .attr("r", 40);
 };
     
-     sampleSVG.selectAll("circle")
-    .data(dataset)
-    .enter().append("circle")
-    .style("stroke", "gray")
-    .style("fill", "white")
-    .attr("r", Math.sqrt(current_width*current_height)/160)
-    .attr("cx", function(d, i){return current_width/2 +  Math.sqrt(current_width*current_height)*i*2*Math.PI/Nt/3})
-    .attr("cy", function(d, i){return current_height/2 + 2*Math.sqrt(current_width*current_height)})
-    .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
-    .on("mouseout", function(){d3.select(this).style("fill", "black");})
-    .on("mousedown", animateFirstStep);
-    
-    // create svg element
+  
 
 // Create data
 var data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-
-// Option 1: give 2 color names
-var myColor = d3.scaleLinear().domain([1,10])
-  .range(["white", "black"])
-sampleSVG.selectAll(".firstrow").data(data).enter().attr("fill", function(d){return myColor(d) })
 
 // Option 2: Color brewer.
 
