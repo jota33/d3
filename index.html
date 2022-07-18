@@ -28,7 +28,13 @@
     var sampleSVG = d3.select("#viz")
     .append("svg")
     .attr("width", current_width)
-    .attr("height",current_height);    
+    .attr("height",current_height)
+   .attr("position", absolute);
+   .attr("margin", auto)
+   .attr("top", 0)
+   .attr("right", 0)
+   .attr("bottom", 0)
+   .attr("left", 0);    
 
     sampleSVG.selectAll("circle")
     .data(dataset)
