@@ -29,12 +29,12 @@
     .append("svg")
     .attr("width", current_width)
     .attr("height",current_height)
-   .attr("position", absolute);
-   .attr("margin", auto)
-   .attr("top", 0)
-   .attr("right", 0)
-   .attr("bottom", 0)
-   .attr("left", 0);    
+    .attr("position", absolute)
+    .attr("margin", auto)
+    .attr("top", 0)
+    .attr("right", 0)
+    .attr("bottom", 0)
+    .attr("left", 0);    
 
     sampleSVG.selectAll("circle")
     .data(dataset)
@@ -81,26 +81,15 @@ var myColor = d3.scaleSequential().domain([1,10])
 svg.selectAll(".secondrow").data(data).enter().append("circle").attr("cx", function(d,i){return 30 + i*60}).attr("cy", 150).attr("r", 19).attr("fill", function(d){return myColor(d) })
 
 // Option 3: Viridis.
-// Include <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script> in your code!
+
 var myColor = d3.scaleSequential().domain([1,10])
   .interpolator(d3.interpolateViridis);
+    
 svg.selectAll(".secondrow").data(data).enter().append("circle").attr("cx", function(d,i){return 30 + i*60}).attr("cy", 250).attr("r", 19).attr("fill", function(d){return myColor(d) })
 // With Hex code
 svg.append("circle").attr("cx",50).attr("cy",100).attr("r",20)
   .style("fill", "#69b3a2");
 
-// With Hex code
-svg.append("circle").attr("cx",150).attr("cy",100).attr("r",20)
-  .style("fill", d3.color("steelblue") );
-
-// With RGBA (last number is the opacity)
-svg.append("circle").attr("cx",250).attr("cy",100).attr("r",20)
-  .style("fill", "rgba(198, 45, 205, 0.8)" )
-
-// With RGB
-svg.append("circle").attr("cx",350).attr("cy",100).attr("r",20)
-  .style("fill", "rgb(12,240,233)" )
-    
 </script>
 
 </body>
