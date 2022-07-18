@@ -67,11 +67,11 @@
     .enter().append("circle")
     .style("stroke", "gray")
     .style("fill", "white")
-    .attr("r", Math.sqrt(current_width*current_height)/80)
-    .attr("cx", function(d, i){return current_width/2 +  i*2*Math.PI/Nt/3})
+    .attr("r", Math.sqrt(current_width*current_height)/160)
+    .attr("cx", function(d, i){return current_width/2 +  Math.sqrt(current_width*current_height)*i*2*Math.PI/Nt/3})
     .attr("cy", function(d, i){return current_height/2 + 2*Math.sqrt(current_width*current_height)})
     .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
-    .on("mouseout", function(){d3.select(this).style("fill", "white");})
+    .on("mouseout", function(){d3.select(this).style("fill", "black");})
     .on("mousedown", animateFirstStep);
     
     // create svg element
@@ -82,7 +82,7 @@ var data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 // Option 1: give 2 color names
 var myColor = d3.scaleLinear().domain([1,10])
   .range(["white", "black"])
-sampleSVG.selectAll(".firstrow").data(data).enter().append("circle").attr("cx", function(d,i){return 30 + i*60}).attr("cy", 50).attr("r", 19).attr("fill", function(d){return myColor(d) })
+sampleSVG.selectAll(".firstrow").data(data).enter().append("circle").attr("r", 19).attr("fill", function(d){return myColor(d) })
 
 // Option 2: Color brewer.
 
