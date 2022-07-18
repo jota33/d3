@@ -59,6 +59,24 @@
     
     
 </script>
+    // create svg element
+var svg = d3.select("#res").append("svg").attr("width", 1000).attr("height",200)
+
+// With Hex code
+svg.append("circle").attr("cx",50).attr("cy",100).attr("r",20)
+  .style("fill", "#69b3a2");
+
+// With Hex code
+svg.append("circle").attr("cx",150).attr("cy",100).attr("r",20)
+  .style("fill", d3.color("steelblue") );
+
+// With RGBA (last number is the opacity)
+svg.append("circle").attr("cx",250).attr("cy",100).attr("r",20)
+  .style("fill", "rgba(198, 45, 205, 0.8)" )
+
+// With RGB
+svg.append("circle").attr("cx",350).attr("cy",100).attr("r",20)
+  .style("fill", "rgb(12,240,233)" )
 </body>
    
 </html>
