@@ -77,14 +77,14 @@ var data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
 var myColor = d3.scaleSequential().domain([1,10])
   .interpolator(d3.interpolatePuRd);
-sampleSVG.selectAll(".secondrow").data(data).enter().append("circle").attr("cx", function(d,i){return 30 + i*60}).attr("cy", 150).attr("r", 19).attr("fill", function(d){return myColor(d) })
+sampleSVG.selectAll(".secondrow").data(data).enter().append("circle").attr("cy", function(d,i){return 30 + i*60}).attr("cy", 150).attr("r", 19).attr("fill", function(d){return myColor(d) })
 
 // Option 3: Viridis.
 
 var myColor = d3.scaleSequential().domain([1,10])
   .interpolator(d3.interpolateViridis);
     
-sampleSVG.selectAll(".secondrow").data(data).enter().append("circle").attr("cx", function(d,i){return 30 + i*60}).attr("cy", 250).attr("r", 19).attr("fill", function(d){return myColor(d) })
+sampleSVG.selectAll(".secondrow").data(data).enter().append("circle").attr("cy", function(d,i){return 30 + i*60}).attr("cy", 250).attr("r", 19).attr("fill", function(d){return myColor(d) })
 
 </script>
 
