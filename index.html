@@ -3,9 +3,40 @@
 <head>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    
+ <style>
+ .responsive{
+  max-width:100%;
+  max-height:100%;
+}
+
+.center{
+  position: absolute;
+  top: 50%;
+  left: 50%; 
+  transform: translate(-50%, -50%);
+}
+
+parent{
+  position: relative;
+}  
+
+  text {
+    font: bold 36px Verdana, Helvetica, Arial, sans-serif;
+    fill: red;
+  }
+     
+</style>
 </head>
 <body>
-<div id="viz"></div>
+    <div id="viz" class="parrent"> 
+      <svg class="responsive center" >
+        <rect x="0" y="0" width="550" height="350"/>
+         <polyline points="0,0 0,350 550,350"/>
+         <text x="0" y="50%" fill="#ffffff" stroke="none" width="100%">Simplified example</text>
+ </svg>
+    </div>
+    
 <script type="text/javascript">
     var dataset = [];
     var margin = {
