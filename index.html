@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
     
  <style>
 container {
@@ -181,13 +180,13 @@ var margin = {
   width = 1100 - margin.left - margin.right,
   height = 650 - margin.top - margin.bottom;
 
-var x = d3.scaleOrdinal()
+var x = d3.scale.ordinal()
   .domain(newData.map(function(d) {
     return d.name;
   }))
   .rangeBands([0, width], .1);
 
-var y = d3.scaleLinear()
+var y = d3.scale.linear()
   .domain([0, Math.ceil(d3.max(newData, function(d) {
     return d.days
   }) / 1000) * 1000])
