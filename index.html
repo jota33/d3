@@ -187,7 +187,7 @@ var x = d3.scale.ordinal()
   }))
   .rangeBands([0, width], .1);
 
-var y = d3.scale.linear()
+var y = d3.scaleLinear()
   .domain([0, Math.ceil(d3.max(newData, function(d) {
     return d.days
   }) / 1000) * 1000])
