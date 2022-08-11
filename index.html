@@ -181,7 +181,7 @@ var margin = {
   width = 1100 - margin.left - margin.right,
   height = 650 - margin.top - margin.bottom;
 
-var x = d3.scale.ordinal()
+var x = d3.scaleOrdinal()
   .domain(newData.map(function(d) {
     return d.name;
   }))
