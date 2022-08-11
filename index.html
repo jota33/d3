@@ -5,27 +5,53 @@
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     
  <style>
- .responsive{
-  max-width:100%;
-  max-height:100%;
+container {
+  font-family: "Verdana";
+  margin-top: 40px;
 }
 
-.center{
-  position: absolute;
-  top: 50%;
-  left: 50%; 
-  transform: translate(-50%, -50%);
+svg {
+  margin-top: 20px;
 }
 
-parent{
-  position: relative;
-}  
+svg rect {
+  fill: blue;
+}
 
-  text {
-    font: bold 36px Verdana, Helvetica, Arial, sans-serif;
-    fill: red;
-  }
-     
+svg rect:hover {
+  fill: red;
+}
+
+svg text {
+  fill: black;
+  font: 12px sans-serif;
+  text-anchor: end;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.d3-tip {
+  line-height: 1;
+  font-family: sans-serif;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 8px;
+}
+
 </style>
 </head>
 <body>
