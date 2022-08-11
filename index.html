@@ -29,6 +29,17 @@ parent{
 </style>
 </head>
 <body>
+    <div class="container">
+  <h2>Presidents: Length of Retirement, in Days</h2>
+  <div class="btn-group" data-toggle="buttons">
+    <label class="btn btn-primary active">
+      <input type="radio" name="options" id="chronological" autocomplete="off" checked> Chronological
+    </label>
+    <label class="btn btn-primary">
+      <input type="radio" name="options" id="descending" autocomplete="off"> Descending
+    </label>
+  </div>
+    
     <div id="viz" class="parrent"> 
       <svg class="responsive center" >
         <rect x="0" y="0" width="550" height="350"/>
@@ -37,6 +48,252 @@ parent{
  </svg>
     
 <script type="text/javascript">
+    data = {
+  names: [
+    "(1) George Washington",
+    "(2) John Adams",
+    "(3) Thomas Jefferson",
+    "(4) James Madison",
+    "(5) James Monroe",
+    "(6) John Quincy Adams",
+    "(7) Andrew Jackson",
+    "(8) Martin Van Buren",
+    "(9) William Henry Harrison",
+    "(10) John Tyler",
+    "(11) James K. Polk",
+    "(12) Zachary Taylor",
+    "(13) Millard Fillmore",
+    "(14) Franklin Pierce",
+    "(15) James Buchanan",
+    "(16) Abraham Lincoln",
+    "(17) Andrew Johnson",
+    "(18) Ulysses S. Grant",
+    "(19) Rutherford B. Hayes",
+    "(20) James A. Garfield",
+    "(21) Chester A. Arthur",
+    "(22) Grover Cleveland",
+    "(23) Benjamin Harrison",
+    "(24) Grover Cleveland",
+    "(25) William McKinley",
+    "(26) Theodore Roosevelt",
+    "(27) William Howard Taft",
+    "(28) Woodrow Wilson",
+    "(29) Warren G. Harding",
+    "(30) Calvin Coolidge",
+    "(31) Herbert Hoover",
+    "(32) Franklin D. Roosevelt",
+    "(33) Harry S. Truman",
+    "(34) Dwight D. Eisenhower",
+    "(35) John F. Kennedy",
+    "(36) Lyndon B. Johnson",
+    "(37) Richard Nixon",
+    "(38) Gerald Ford",
+    "(39) Jimmy Carter",
+    "(40) Ronald Reagan",
+    "(41) George H. W. Bush",
+    "(42) Bill Clinton",
+    "(43) George W. Bush",
+    "(44) Barack Obama"
+  ],
+  days: [
+    1015,
+    9253,
+    6331,
+    7056,
+    2313,
+    6930,
+    3018,
+    7812,
+    0,
+    6164,
+    103,
+    0,
+    7674,
+    4601,
+    2646,
+    0,
+    2340,
+    3063,
+    4337,
+    0,
+    624,
+    7051,
+    2930,
+    4129,
+    0,
+    3595,
+    6213,
+    1066,
+    0,
+    1403,
+    11553,
+    0,
+    7280,
+    2989,
+    0,
+    1463,
+    7196,
+    10932,
+    12760,
+    5615,
+    8377,
+    5455,
+    2533,
+    0
+  ]
+};
+var newData = [];
+data.names.forEach(function(d, i) {
+  newData.push({
+    name: d,
+    days: data.days[i],
+    id: i
+  })
+});
+
+var margin = {
+    top: 20,
+    right: 20,
+    bottom: 180,
+    left: 80
+  },
+  width = 1100 - margin.left - margin.right,
+  height = 650 - margin.top - margin.bottom;
+
+var x = d3.scale.ordinal()
+  .domain(newData.map(function(d) {
+    return d.name;
+  }))
+  .rangeBands([0, width], .1);
+
+var y = d3.scale.linear()
+  .domain([0, Math.ceil(d3.max(newData, function(d) {
+    return d.days
+  }) / 1000) * 1000])
+  .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+  .scale(x)
+  .orient("bottom");
+
+var yAxis = d3.svg.axis()
+  .scale(y)
+  .orient("left")
+  .ticks(10);
+
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return d.days + " days";
+  })
+
+var svg = d3.select(".container")
+  .append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
+
+var barWidth = width / data.days.length;
+
+svg.selectAll("rect")
+  .data(newData)
+  .enter().append("rect")
+  // this might be affected:
+  .attr("transform", function(d, i) {
+    return "translate(" + i * barWidth + ",0)";
+  })
+  .attr("y", function(d) {
+    return y(d.days);
+  })
+  .attr("height", function(d) {
+    return height - y(d.days) + 1;
+  })
+  .attr("width", barWidth - 1)
+  .on('mouseover', tip.show)
+  .on('mouseout', tip.hide);
+
+svg.append("g")
+  .attr("class", "x axis")
+  .attr("transform", "translate(0," + height + ")")
+  .call(xAxis)
+  .selectAll("text")
+  .style("text-anchor", "end")
+  .attr("dx", "-.9em")
+  .attr("dy", ".25em")
+  .attr("transform", "rotate(-50)");
+
+svg.append("g")
+  .attr("class", "y axis")
+  .call(yAxis)
+  .append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("y", 6)
+  .attr("dy", "-6em")
+  .attr("dx", "-15em")
+  .style("text-anchor", "end")
+  .text("Days");
+
+var sortOrder = false;
+
+var sortBars = function() {
+	
+	if (sortOrder){
+    var sorted = newData.sort(function(a, b) {
+	    	return d3.descending(a.days, b.days);
+    });
+  } else {
+    var sorted = newData.sort(function(a, b) {
+	    	return d3.ascending(a.id, b.id);
+    });
+  }
+    
+  x.domain(sorted.map(function(d) {
+    return d.name;
+  }))
+  svg.selectAll("rect")
+    .sort(function(a, b) {
+      if (sortOrder) {
+        return d3.descending(a.days, b.days);
+      } else {
+        return d3.ascending(a.id, b.id);
+      }
+    });
+  var transition = svg.transition().duration(750),
+    delay = function(d, i) {
+      return i * 50;
+    };
+
+
+  transition.select(".x.axis")
+    .call(xAxis)
+    .selectAll("text")
+    .style("text-anchor", "end")
+    .attr("dx", "-.9em")
+    .attr("dy", ".25em")
+    .attr("transform", "rotate(-50)")
+    .delay(delay);
+
+  transition.selectAll("rect")
+    .attr("transform", function(d, i) {
+      return "translate(" + i * barWidth + ",0)";
+    });
+}
+
+
+$("#descending").on("click", function() {
+  sortOrder = true;
+  sortBars();
+});
+
+$("#chronological").on("click", function() {
+  sortOrder = false;
+  sortBars();
+});
+
     var dataset = [];
     var margin = {
      top: 20,
